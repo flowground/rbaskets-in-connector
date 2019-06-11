@@ -1,0 +1,67 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "required": true,
+            "type": "string"
+        },
+        "method": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "GET",
+                "HEAD",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE",
+                "CONNECT",
+                "OPTIONS",
+                "TRACE"
+            ]
+        },
+        "requestBody": {
+            "properties": {
+                "body": {
+                    "description": "Content of response body",
+                    "example": "Success",
+                    "type": "string"
+                },
+                "headers": {
+                    "additionalProperties": {
+                        "description": "Collection of header values",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "description": "Map of HTTP headers, key represents name, value is array of values",
+                    "example": {
+                        "Accept": [
+                            "application/json",
+                            "application/xml"
+                        ],
+                        "Connection": [
+                            "close"
+                        ],
+                        "Content-Type": [
+                            "application/json"
+                        ]
+                    },
+                    "type": "object"
+                },
+                "is_template": {
+                    "description": "If set to `true` the body is treated as [HTML template](https://golang.org/pkg/html/template) that accepts\ninput from request parameters.\n",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "status": {
+                    "description": "The HTTP status code to reply with",
+                    "example": 200,
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        }
+    }
+}

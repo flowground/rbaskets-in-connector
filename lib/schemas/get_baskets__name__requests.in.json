@@ -1,0 +1,31 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "required": true,
+            "type": "string"
+        },
+        "max": {
+            "required": false,
+            "type": "integer"
+        },
+        "skip": {
+            "required": false,
+            "type": "integer"
+        },
+        "q": {
+            "required": false,
+            "type": "string"
+        },
+        "in": {
+            "required": false,
+            "type": "string",
+            "enum": [
+                "any",
+                "body",
+                "query",
+                "headers"
+            ]
+        }
+    }
+}

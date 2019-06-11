@@ -1,0 +1,39 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "capacity": {
+                    "description": "Baskets capacity, defines maximum number of requests to store",
+                    "example": 250,
+                    "type": "integer"
+                },
+                "expand_path": {
+                    "description": "If set to `true` the forward URL path will be expanded when original HTTP request contains compound path.",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "forward_url": {
+                    "description": "URL to forward all incoming requests of the basket, `empty` value disables forwarding",
+                    "example": "https://myservice.example.com/events-collector",
+                    "type": "string"
+                },
+                "insecure_tls": {
+                    "description": "If set to `true` the certificate verification will be disabled if forward URL indicates HTTPS scheme.\n**Warning:** enabling this feature has known security implications.\n",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "proxy_response": {
+                    "description": "If set to `true` this basket behaves as a full proxy: responses from underlying service configured in `forward_url`\nare passed back to clients of original requests. The configuration of basket responses is ignored in this case.\n",
+                    "example": false,
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        }
+    }
+}

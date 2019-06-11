@@ -1,0 +1,384 @@
+{
+    "title": "Request Baskets",
+    "description": "RESTful API of [Request Baskets](https://rbaskets.in) service.\n\nRequest Baskets is an open source project of a service to collect HTTP requests and inspect them via RESTful\nAPI or web UI.\n\nCheck out the [project page](https://github.com/darklynx/request-baskets) for more detailed description.\n",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/rbaskets.in/1.0.0/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://rbaskets.in/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "auth_basket_token": {
+                "label": "Authorization (basket_token)",
+                "viewClass": "TextFieldView",
+                "note": "Basket assigned secure token"
+            },
+            "auth_service_token": {
+                "label": "Authorization (service_token)",
+                "viewClass": "TextFieldView",
+                "note": "Service master token"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "get_api_baskets": {
+            "main": "./lib/actions/get_api_baskets.js",
+            "title": "Get baskets",
+            "description": "Fetches a list of basket names managed by service. Require master token.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_api_baskets.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "delete_api_baskets__name_": {
+            "main": "./lib/actions/delete_api_baskets__name_.js",
+            "title": "Delete basket",
+            "description": "Permanently deletes this basket and all collected requests.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/delete_api_baskets__name_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_api_baskets__name_": {
+            "main": "./lib/actions/get_api_baskets__name_.js",
+            "title": "Get basket settings",
+            "description": "Retrieves configuration settings of this basket.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_api_baskets__name_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "post_api_baskets__name_": {
+            "main": "./lib/actions/post_api_baskets__name_.js",
+            "title": "Create new basket",
+            "description": "Creates a new basket with this name.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/post_api_baskets__name_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "put_api_baskets__name_": {
+            "main": "./lib/actions/put_api_baskets__name_.js",
+            "title": "Update basket settings",
+            "description": "Updates configuration settings of this basket.\n\nSpecial configuration parameters for request forwarding:\n  * `insecure_tls` controls certificate verification when forwarding requests. Setting this parameter to `true`\n  allows to forward collected HTTP requests via HTTPS protocol even if the forward end-point is configured with\n  self-signed TLS/SSL certificate. **Warning:** enabling this feature has known security implications.\n  * `expand_path` changes the logic of constructing taget URL when forwarding requests. If this parameter is\n  set to `true` the forward URL path will be expanded when original HTTP request contains compound path. For\n  example, a basket with name **server1** is configured to forward all requests to `http://server1.intranet:8001/myservice`\n  and it has received an HTTP request like `GET http://baskets.example.com/server1/component/123/events?status=OK`\n  then depending on `expand_path` settings the request will be forwarded to:\n    * `true` => `GET http://server1.intranet:8001/myservice/component/123/events?status=OK`\n    * `false` => `GET http://server1.intranet:8001/myservice?status=OK`\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/put_api_baskets__name_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "delete_api_baskets__name__requests": {
+            "main": "./lib/actions/delete_api_baskets__name__requests.js",
+            "title": "Delete all requests",
+            "description": "Deletes all requests collected by this basket.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/delete_api_baskets__name__requests.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_api_baskets__name__requests": {
+            "main": "./lib/actions/get_api_baskets__name__requests.js",
+            "title": "Get collected requests",
+            "description": "Fetches collection of requests collected by this basket.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_api_baskets__name__requests.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_api_baskets__name__responses__method_": {
+            "main": "./lib/actions/get_api_baskets__name__responses__method_.js",
+            "title": "Get response settings",
+            "description": "Retrieves information about configured response of the basket. Service will reply with this response to any\nHTTP request sent to the basket with appropriate HTTP method.\n\nIf nothing is configured, the default response is HTTP 200 - OK with empty content.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_api_baskets__name__responses__method_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "put_api_baskets__name__responses__method_": {
+            "main": "./lib/actions/put_api_baskets__name__responses__method_.js",
+            "title": "Update response settings",
+            "description": "Allows to configure HTTP response of this basket. The service will reply with configured response to any HTTP\nrequest sent to the basket with appropriate HTTP method.\n\nIf nothing is configured, the default response is HTTP 200 - OK with empty content.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/put_api_baskets__name__responses__method_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_api_stats": {
+            "main": "./lib/actions/get_api_stats.js",
+            "title": "Get baskets statistics",
+            "description": "Get service statistics about baskets and collected HTTP requests. Require master token.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_api_stats.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_api_version": {
+            "main": "./lib/actions/get_api_version.js",
+            "title": "Get service version",
+            "description": "Get service version.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_api_version.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_baskets": {
+            "main": "./lib/actions/get_baskets.js",
+            "title": "Get baskets",
+            "description": "Fetches a list of basket names managed by service. Require master token.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_baskets.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "delete_baskets__name_": {
+            "main": "./lib/actions/delete_baskets__name_.js",
+            "title": "Delete basket",
+            "description": "Permanently deletes this basket and all collected requests.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/delete_baskets__name_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_baskets__name_": {
+            "main": "./lib/actions/get_baskets__name_.js",
+            "title": "Get basket settings",
+            "description": "Retrieves configuration settings of this basket.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_baskets__name_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "post_baskets__name_": {
+            "main": "./lib/actions/post_baskets__name_.js",
+            "title": "Create new basket",
+            "description": "Creates a new basket with this name.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/post_baskets__name_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "put_baskets__name_": {
+            "main": "./lib/actions/put_baskets__name_.js",
+            "title": "Update basket settings",
+            "description": "Updates configuration settings of this basket.\n\nSpecial configuration parameters for request forwarding:\n  * `insecure_tls` controls certificate verification when forwarding requests. Setting this parameter to `true`\n  allows to forward collected HTTP requests via HTTPS protocol even if the forward end-point is configured with\n  self-signed TLS/SSL certificate. **Warning:** enabling this feature has known security implications.\n  * `expand_path` changes the logic of constructing taget URL when forwarding requests. If this parameter is\n  set to `true` the forward URL path will be expanded when original HTTP request contains compound path. For\n  example, a basket with name **server1** is configured to forward all requests to `http://server1.intranet:8001/myservice`\n  and it has received an HTTP request like `GET http://baskets.example.com/server1/component/123/events?status=OK`\n  then depending on `expand_path` settings the request will be forwarded to:\n    * `true` => `GET http://server1.intranet:8001/myservice/component/123/events?status=OK`\n    * `false` => `GET http://server1.intranet:8001/myservice?status=OK`\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/put_baskets__name_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "delete_baskets__name__requests": {
+            "main": "./lib/actions/delete_baskets__name__requests.js",
+            "title": "Delete all requests",
+            "description": "Deletes all requests collected by this basket.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/delete_baskets__name__requests.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_baskets__name__requests": {
+            "main": "./lib/actions/get_baskets__name__requests.js",
+            "title": "Get collected requests",
+            "description": "Fetches collection of requests collected by this basket.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_baskets__name__requests.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_baskets__name__responses__method_": {
+            "main": "./lib/actions/get_baskets__name__responses__method_.js",
+            "title": "Get response settings",
+            "description": "Retrieves information about configured response of the basket. Service will reply with this response to any\nHTTP request sent to the basket with appropriate HTTP method.\n\nIf nothing is configured, the default response is HTTP 200 - OK with empty content.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_baskets__name__responses__method_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "put_baskets__name__responses__method_": {
+            "main": "./lib/actions/put_baskets__name__responses__method_.js",
+            "title": "Update response settings",
+            "description": "Allows to configure HTTP response of this basket. The service will reply with configured response to any HTTP\nrequest sent to the basket with appropriate HTTP method.\n\nIf nothing is configured, the default response is HTTP 200 - OK with empty content.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/put_baskets__name__responses__method_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

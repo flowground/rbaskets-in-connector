@@ -1,0 +1,24 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "required": true,
+            "type": "string"
+        },
+        "method": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "GET",
+                "HEAD",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE",
+                "CONNECT",
+                "OPTIONS",
+                "TRACE"
+            ]
+        }
+    }
+}

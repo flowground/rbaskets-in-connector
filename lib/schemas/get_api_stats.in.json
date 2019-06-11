@@ -1,0 +1,9 @@
+{
+    "type": "object",
+    "properties": {
+        "max": {
+            "required": false,
+            "type": "integer"
+        }
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "type": "object",
+    "properties": {
+        "max": {
+            "required": false,
+            "type": "integer"
+        },
+        "skip": {
+            "required": false,
+            "type": "integer"
+        },
+        "q": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}
